@@ -1,9 +1,12 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cooking Up A Storm — Production Hub</title>
+  <title>{{ site.data.overview.title }} — Production Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
@@ -18,55 +21,21 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── CONTAINER ── */
     .container { max-width: 1000px; margin: 24px auto; background: var(--white); box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
     @media (max-width: 1048px) { .container { margin: 0; box-shadow: none; } }
 
-    /* ── HEADER ── */
-    .site-header {
-      border-bottom: 1px solid var(--rule);
-      padding: 0 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      height: 56px; position: sticky; top: 0; background: var(--white); z-index: 100;
-      border-top: 3px solid var(--accent);
-    }
-    .header-logo {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 16px; font-weight: 900; text-transform: uppercase;
-      letter-spacing: 0.04em; color: var(--black);
-    }
+    .site-header { border-bottom: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 56px; position: sticky; top: 0; background: var(--white); z-index: 100; }
+    .header-logo { font-family: 'Red Hat Display', sans-serif; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); }
     .header-logo span { color: var(--accent); }
     .header-right { display: flex; align-items: center; gap: 16px; }
-    .header-film-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 13px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--muted);
-    }
-    .header-badge {
-      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent); padding: 3px 8px;
-    }
+    .header-film-title { font-family: 'Red Hat Display', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .header-badge { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 8px; }
 
-    /* ── QUICK NAV ── */
-    .quick-nav {
-      border-bottom: 1px solid var(--rule);
-      padding: 0 24px; overflow-x: auto;
-      display: flex; gap: 0; white-space: nowrap;
-      background: var(--off);
-    }
-    .quick-nav a {
-      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); padding: 12px 14px; display: inline-block;
-      border-bottom: 2px solid transparent; transition: all 0.2s;
-      text-decoration: none; font-weight: 400;
-    }
+    .quick-nav { border-bottom: 1px solid var(--rule); padding: 0 24px; overflow-x: auto; display: flex; gap: 0; white-space: nowrap; background: var(--off); }
+    .quick-nav a { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 12px 14px; display: inline-block; border-bottom: 2px solid transparent; transition: all 0.2s; text-decoration: none; font-weight: 400; }
     .quick-nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
 
-    /* ── CALL SHEET HERO ── */
-    .callsheet-hero {
-      display: grid; grid-template-columns: 220px 1fr 220px;
-      border-bottom: 1px solid var(--rule);
-    }
+    .callsheet-hero { display: grid; grid-template-columns: 220px 1fr 220px; border-bottom: 1px solid var(--rule); }
     .cs-col { padding: 24px; }
     .cs-col + .cs-col { border-left: 1px solid var(--rule); }
     .cs-col-center { text-align: center; }
@@ -83,35 +52,30 @@
     .cs-time-label { color: var(--light-text); }
     .cs-time-value { font-weight: 500; color: var(--black); }
 
-    /* ── SECTION ── */
-    .section { padding: 0 24px 32px; }
-    .section-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0 12px; border-bottom: 2px solid var(--black); margin-bottom: 20px;
-    }
-    .section-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 16px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.04em; color: var(--black);
-      display: flex; align-items: center; gap: 8px;
-    }
+    .section { padding: 32px 24px; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 2px solid var(--black); margin-bottom: 20px; }
+    .section-title { font-family: 'Red Hat Display', sans-serif; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--accent); flex-shrink: 0; }
     .section-count { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .section-divider { height: 1px; background: var(--rule); margin: 0 24px; }
 
-    /* ── SYNOPSIS ── */
     .synopsis-text { font-size: 14px; line-height: 1.85; color: var(--text); max-width: 720px; }
 
-    /* ── SCRIPT ── */
     .script-box { background: var(--off); border: 1px solid var(--rule); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
     .script-name { font-family: 'Red Hat Display', sans-serif; font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 3px; }
     .script-meta { font-size: 12px; color: var(--muted); }
     .script-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Red Hat Display', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: var(--black); color: white; padding: 10px 18px; transition: background 0.2s; text-decoration: none; white-space: nowrap; }
     .script-btn:hover { background: var(--accent); text-decoration: none; }
 
-    /* ── CHARACTERS ── */
+    .moodboard-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+    .moodboard-cell { aspect-ratio: 4/3; background: var(--off); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .moodboard-cell img { width: 100%; height: 100%; object-fit: cover; }
+    .moodboard-ph { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #c0c0cc; }
+
     .character-card { border: 1px solid var(--rule); margin-bottom: 12px; }
-    .character-header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-bottom: 1px solid transparent; transition: background 0.2s; }
+    .character-header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
     .character-header:hover { background: var(--off); }
-    .character-header.open { border-bottom-color: var(--rule); background: var(--off); }
+    .character-header.open { border-bottom: 1px solid var(--rule); background: var(--off); }
     .character-name { font-family: 'Red Hat Display', sans-serif; font-size: 15px; font-weight: 800; text-transform: uppercase; color: var(--black); }
     .character-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .character-toggle { font-size: 18px; color: var(--muted); }
@@ -125,13 +89,6 @@
     .char-video-ph svg { display: block; margin: 0 auto 6px; }
     .char-video-ph p { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
 
-    /* ── MOODBOARD ── */
-    .moodboard-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
-    .moodboard-cell { aspect-ratio: 4/3; background: var(--off); border: 1px dashed var(--rule); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .moodboard-cell img { width: 100%; height: 100%; object-fit: cover; }
-    .moodboard-ph { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #c0c0cc; }
-
-    /* ── SCHEDULE ── */
     .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .data-table th { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--rule); font-weight: 400; }
     .data-table td { padding: 12px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -141,72 +98,52 @@
     .scene-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .dn-day { font-size: 10px; letter-spacing: 0.1em; color: #c45000; background: #fff3ed; padding: 2px 6px; text-transform: uppercase; font-weight: 500; }
     .dn-night { font-size: 10px; letter-spacing: 0.1em; color: #3949ab; background: #eef0fb; padding: 2px 6px; text-transform: uppercase; font-weight: 500; }
-
-    /* ── TALENT ── */
     .talent-avatar { width: 34px; height: 34px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Red Hat Display', sans-serif; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
     .talent-name { font-weight: 500; color: var(--black); font-size: 13px; }
     .talent-contact { font-size: 11px; color: var(--muted); margin-top: 1px; }
-    .talent-cell { display: flex; align-items: center; gap: 10px; }
 
-    /* ── CREW ── */
-    .crew-dept-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); padding: 10px 0 6px; border-bottom: 1px solid var(--rule); margin-bottom: 0; font-weight: 500; }
+    .crew-dept-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); padding: 10px 0 6px; border-bottom: 1px solid var(--rule); font-weight: 500; }
     .crew-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
     .crew-member { padding: 10px 0; border-bottom: 1px solid var(--rule); padding-right: 16px; }
-    .crew-member:last-child { border-bottom: none; }
     .crew-member-inner { display: flex; justify-content: space-between; align-items: flex-start; }
     .crew-name { font-weight: 500; color: var(--black); font-size: 13px; }
     .crew-role { font-size: 11px; color: var(--muted); }
     .crew-contact { font-size: 11px; color: var(--muted); }
     .crew-call { font-family: 'Red Hat Display', sans-serif; font-size: 12px; font-weight: 700; color: var(--black); white-space: nowrap; }
 
-    /* ── LOCATIONS ── */
-    .location-row { display: grid; grid-template-columns: 40px 1fr 1fr 1fr; gap: 0; border-bottom: 1px solid var(--rule); }
-    .location-row:first-child { border-top: 1px solid var(--rule); }
+    .location-header-row { display: grid; grid-template-columns: 40px 1fr 1fr 1fr; border-bottom: 1px solid var(--rule); }
+    .location-header-cell { padding: 8px 12px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+    .location-row { display: grid; grid-template-columns: 40px 1fr 1fr 1fr; border-bottom: 1px solid var(--rule); }
+    .location-row:first-of-type { border-top: 1px solid var(--rule); }
     .location-cell { padding: 14px 12px; border-right: 1px solid var(--rule); }
     .location-cell:last-child { border-right: none; }
     .location-num-cell { display: flex; align-items: center; justify-content: center; background: var(--off); }
     .location-num { font-family: 'Red Hat Display', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); }
-    .location-col-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+    .location-col-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
     .location-value { font-size: 12px; color: var(--text); line-height: 1.65; }
     .location-note { font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
-    /* ── TABLE HEADER ROW ── */
-    .location-header-row { display: grid; grid-template-columns: 40px 1fr 1fr 1fr; border-bottom: 1px solid var(--rule); }
-    .location-header-cell { padding: 8px 12px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
-
-    /* ── HIDDEN SECTIONS ── */
-    .hidden-section { display: none; }
-
-    /* ── DIVIDER ── */
-    .section-divider { height: 1px; background: var(--rule); margin: 0 24px; }
-
-    /* ── FOOTER ── */
-    footer { border-top: 1px solid var(--rule); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-top: 32px; }
+    footer { border-top: 1px solid var(--rule); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-family: 'Red Hat Display', sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); }
     .footer-logo span { color: var(--accent); }
     .footer-copy { font-size: 11px; color: var(--muted); }
 
-    /* ── MOBILE ── */
-    /* ── TABLET ── */
     @media (max-width: 768px) {
       .callsheet-hero { grid-template-columns: 1fr 1fr; }
       .cs-col:last-child { grid-column: span 2; border-left: none; border-top: 1px solid var(--rule); }
       .crew-grid { grid-template-columns: 1fr; }
     }
-    /* ── MOBILE ── */
     @media (max-width: 540px) {
       .callsheet-hero { grid-template-columns: 1fr; }
       .cs-col + .cs-col { border-left: none; border-top: 1px solid var(--rule); }
       .cs-col:last-child { grid-column: auto; }
       .moodboard-grid { grid-template-columns: 1fr 1fr; }
-      .crew-grid { grid-template-columns: 1fr; }
-      .location-row { grid-template-columns: 32px 1fr; }
+      .location-row, .location-header-row { grid-template-columns: 32px 1fr; }
       .location-header-row { display: none; }
-      .location-cell:nth-child(3), .location-cell:nth-child(4) { grid-column: 2; border-top: 1px solid var(--rule); }
       .data-table { font-size: 12px; }
       .data-table th, .data-table td { padding: 8px 6px; }
       .header-film-title { display: none; }
-      .section { padding-left: 16px; padding-right: 16px; }
+      .section { padding: 24px 16px; }
       .section-divider { margin: 0 16px; }
     }
   </style>
@@ -219,7 +156,7 @@
   <header class="site-header">
     <div class="header-logo">Bread<span>.</span></div>
     <div class="header-right">
-      <span class="header-film-title">Cooking Up A Storm</span>
+      <span class="header-film-title">{{ site.data.overview.title }}</span>
       <span class="header-badge">Production Hub</span>
     </div>
   </header>
@@ -227,86 +164,95 @@
   <!-- QUICK NAV -->
   <nav class="quick-nav">
     <a href="#synopsis">Synopsis</a>
+    <a href="#moodboard">Moodboard</a>
     <a href="#script">Script</a>
     <a href="#characters">Characters</a>
-    <a href="#moodboard">Moodboard</a>
-    <a href="#callsheet">Call Sheet</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#talent">Talent</a>
-    <a href="#crew">Crew</a>
-    <a href="#locations">Locations</a>
+    {% if site.data.callsheet.visible %}<a href="#callsheet">Call Sheet</a>{% endif %}
+    {% if site.data.schedule.visible %}<a href="#schedule">Schedule</a>{% endif %}
+    {% if site.data.talent.visible %}<a href="#talent">Talent</a>{% endif %}
+    {% if site.data.crew.visible %}<a href="#crew">Crew</a>{% endif %}
+    {% if site.data.locations.visible %}<a href="#locations">Locations</a>{% endif %}
   </nav>
 
   <!-- CALL SHEET HERO -->
-  <div class="callsheet-hero" id="callsheet-hero">
+  <div class="callsheet-hero">
     <div class="cs-col">
       <div class="cs-label">Production</div>
-      <div class="cs-value">Bread Media</div>
+      <div class="cs-value">{{ site.data.overview.company }}</div>
       <div class="cs-label">Director</div>
-      <div class="cs-value">Hantz Leger</div>
+      <div class="cs-value">{{ site.data.overview.director }}</div>
       <div class="cs-label">Shoot Date</div>
-      <div class="cs-value">TBC</div>
+      <div class="cs-value">{{ site.data.overview.shoot_date }}</div>
       <div class="cs-label">Format</div>
-      <div class="cs-value">Short Film · Dark Comedy</div>
+      <div class="cs-value">{{ site.data.overview.format }} · {{ site.data.overview.genre }}</div>
     </div>
     <div class="cs-col cs-col-center">
       <div class="cs-label">Film</div>
-      <div class="cs-film-title">Cooking Up A Storm</div>
+      <div class="cs-film-title">{{ site.data.overview.title }}</div>
       <div class="cs-label" style="margin-top:16px;">General Call Time</div>
-      <div class="cs-general-call">TBC</div>
-      <div class="cs-general-note">All crew report to set</div>
-      <div class="cs-note-box">General notes will appear here. Add basecamp info, parking instructions, or any notes for the whole crew.</div>
+      <div class="cs-general-call">{{ site.data.callsheet.general_call }}</div>
+      <div class="cs-general-note">{{ site.data.callsheet.general_note_line }}</div>
+      <div class="cs-note-box">{{ site.data.callsheet.notes }}</div>
     </div>
     <div class="cs-col">
       <div class="cs-day-label">Day</div>
-      <div class="cs-day-value">Day 1 of 1</div>
-      <div class="cs-time-row"><span class="cs-time-label">Crew Call</span><span class="cs-time-value">TBC</span></div>
-      <div class="cs-time-row"><span class="cs-time-label">Shooting Call</span><span class="cs-time-value">TBC</span></div>
-      <div class="cs-time-row"><span class="cs-time-label">Breakfast</span><span class="cs-time-value">TBC</span></div>
-      <div class="cs-time-row"><span class="cs-time-label">Lunch</span><span class="cs-time-value">TBC</span></div>
-      <div class="cs-time-row"><span class="cs-time-label">Wrap</span><span class="cs-time-value">TBC</span></div>
+      <div class="cs-day-value">{{ site.data.callsheet.day }}</div>
+      {% for time in site.data.callsheet.times %}
+      <div class="cs-time-row">
+        <span class="cs-time-label">{{ time.label }}</span>
+        <span class="cs-time-value">{{ time.time }}</span>
+      </div>
+      {% endfor %}
     </div>
   </div>
 
   <!-- SYNOPSIS -->
-  <div class="section" id="synopsis" style="padding-top:32px;">
+  <div class="section" id="synopsis">
     <div class="section-header">
       <div class="section-title">Synopsis</div>
     </div>
-    <p class="synopsis-text">While caring for their dying patriarch, three siblings uncover a decades-old family secret. As bickering turns to chaos, their own clumsy negligence threatens to turn a quiet vigil into a fatal comedy of errors. A darkly comic meditation on family, guilt, and the chaos that erupts when love and dysfunction collide in the same kitchen.</p>
+    <p class="synopsis-text">{{ site.data.synopsis.text }}</p>
   </div>
 
   <div class="section-divider"></div>
 
   <!-- MOODBOARD -->
-  <div class="section" id="moodboard" style="padding-top:32px;">
+  <div class="section" id="moodboard">
     <div class="section-header">
       <div class="section-title">Moodboard</div>
-      <div class="section-count">6 images max</div>
+      <div class="section-count">{{ site.data.moodboard.images | size }} / 6 images</div>
     </div>
     <div class="moodboard-grid">
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 1</div></div>
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 2</div></div>
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 3</div></div>
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 4</div></div>
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 5</div></div>
-      <div class="moodboard-cell"><div class="moodboard-ph">Image 6</div></div>
+      {% if site.data.moodboard.images.size > 0 %}
+        {% for image in site.data.moodboard.images limit:6 %}
+        <div class="moodboard-cell">
+          <img src="{{ image.image }}" alt="{{ image.caption }}"/>
+        </div>
+        {% endfor %}
+        {% for i in (site.data.moodboard.images.size..5) %}
+        <div class="moodboard-cell"><div class="moodboard-ph">Image {{ forloop.index | plus: site.data.moodboard.images.size }}</div></div>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..6) %}
+        <div class="moodboard-cell"><div class="moodboard-ph">Image {{ forloop.index }}</div></div>
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 
   <div class="section-divider"></div>
 
   <!-- SCRIPT -->
-  <div class="section" id="script" style="padding-top:32px;">
+  <div class="section" id="script">
     <div class="section-header">
       <div class="section-title">Script</div>
     </div>
     <div class="script-box">
       <div>
-        <div class="script-name">Cooking Up A Storm — Final Draft</div>
-        <div class="script-meta">PDF · Google Drive · Updated TBC</div>
+        <div class="script-name">{{ site.data.script.title }}</div>
+        <div class="script-meta">{{ site.data.script.notes }}</div>
       </div>
-      <a href="https://drive.google.com/file/d/1TZwjwv5IZYqU6yS9StcTLkzGHhuPr1x9/view?usp=sharing" target="_blank" class="script-btn">
+      <a href="{{ site.data.script.url }}" target="_blank" class="script-btn">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v8M4 6l3 3 3-3M2 10v2a1 1 0 001 1h8a1 1 0 001-1v-2"/></svg>
         Download Script
       </a>
@@ -316,293 +262,213 @@
   <div class="section-divider"></div>
 
   <!-- CHARACTERS -->
-  <div class="section" id="characters" style="padding-top:32px;">
+  <div class="section" id="characters">
     <div class="section-header">
       <div class="section-title">Characters</div>
-      <div class="section-count">3 characters</div>
+      <div class="section-count">{{ site.data.characters.characters | size }} characters</div>
     </div>
-
+    {% for char in site.data.characters.characters %}
     <div class="character-card">
       <div class="character-header" onclick="toggleChar(this)">
-        <div><div class="character-name">Izz</div><div class="character-role">20s · Middle child · Police officer</div></div>
+        <div>
+          <div class="character-name">{{ char.name }}</div>
+          <div class="character-role">{{ char.role }}</div>
+        </div>
         <div class="character-toggle">+</div>
       </div>
       <div class="character-body">
         <div class="char-label">Background</div>
-        <p class="char-text">The problematic and rebellious middle child. Saw which way her life was heading — not in a good direction — and viewed a police career as her salvation and a way to erase Grandad's disappointment with most of her life choices. Like Larry, what Gramps thinks of her is an important component of her self esteem.</p>
+        <p class="char-text">{{ char.background }}</p>
         <div class="char-label">Director's Notes</div>
-        <p class="char-text">TBC — director's notes will be added here.</p>
+        <p class="char-text">{{ char.notes }}</p>
         <div class="char-label">Reference</div>
-        <div class="char-video"><div class="char-video-ph"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="18" cy="18" r="16"/><path d="M14 11l11 7-11 7V11z"/></svg><p>Video placeholder</p></div></div>
+        {% if char.video_url != "" %}
+        <div class="char-video">
+          <iframe src="{{ char.video_url }}" allowfullscreen style="width:100%;height:100%;border:none;aspect-ratio:16/9;"></iframe>
+        </div>
+        {% else %}
+        <div class="char-video">
+          <div class="char-video-ph">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="18" cy="18" r="16"/><path d="M14 11l11 7-11 7V11z"/></svg>
+            <p>Video placeholder</p>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
-
-    <div class="character-card">
-      <div class="character-header" onclick="toggleChar(this)">
-        <div><div class="character-name">Aby</div><div class="character-role">20s · Youngest sibling · Carer / Customer service</div></div>
-        <div class="character-toggle">+</div>
-      </div>
-      <div class="character-body">
-        <div class="char-label">Background</div>
-        <p class="char-text">The youngest sibling but never got a free pass because of it. She lost her job as an estate agent because she was using the kitchens of the homes she was supposed to be selling to kick-start her home-chef influencer ambitions. She lost her rented flat soon after that. She now lives with Gramps and in between being his main carer she works from home as a customer service rep.</p>
-        <div class="char-label">Director's Notes</div>
-        <p class="char-text">TBC — director's notes will be added here.</p>
-        <div class="char-label">Reference</div>
-        <div class="char-video"><div class="char-video-ph"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="18" cy="18" r="16"/><path d="M14 11l11 7-11 7V11z"/></svg><p>Video placeholder</p></div></div>
-      </div>
-    </div>
-
-    <div class="character-card">
-      <div class="character-header" onclick="toggleChar(this)">
-        <div><div class="character-name">Larry</div><div class="character-role">Early 30s · Eldest sibling · Criminal solicitor</div></div>
-        <div class="character-toggle">+</div>
-      </div>
-      <div class="character-body">
-        <div class="char-label">Background</div>
-        <p class="char-text">Criminal solicitor/lawyer. When he started his law career he was newly married, idealistic and optimistic. He admired and looked up to Grandad and the way he was turning kids' lives around as a teacher, and wanted to do something equally important and transformational in the "justice" system. That was before crippling government cuts to legal aid and the court system made that goal a pipe dream.</p>
-        <div class="char-label">Director's Notes</div>
-        <p class="char-text">TBC — director's notes will be added here.</p>
-        <div class="char-label">Reference</div>
-        <div class="char-video"><div class="char-video-ph"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="18" cy="18" r="16"/><path d="M14 11l11 7-11 7V11z"/></svg><p>Video placeholder</p></div></div>
-      </div>
-    </div>
-
+    {% endfor %}
   </div>
 
-
-
   <!-- CALL SHEET (optional) -->
-  <div class="section hidden-section" id="callsheet" style="padding-top:32px;">
+  {% if site.data.callsheet.visible %}
+  <div class="section-divider"></div>
+  <div class="section" id="callsheet">
     <div class="section-header">
       <div class="section-title">Call Sheet</div>
-      <div class="section-count">Day 1 of 1</div>
+      <div class="section-count">{{ site.data.callsheet.day }}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
       <div style="background:var(--off);border:1px solid var(--rule);padding:16px;">
         <div class="cs-label">General Call Time</div>
-        <div style="font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--black);">TBC</div>
+        <div style="font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--black);">{{ site.data.callsheet.general_call }}</div>
       </div>
       <div style="background:var(--off);border:1px solid var(--rule);padding:16px;">
         <div class="cs-label">Shooting Call</div>
-        <div style="font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--black);">TBC</div>
+        <div style="font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--black);">{{ site.data.callsheet.shooting_call }}</div>
       </div>
     </div>
-    <div style="background:var(--off);border-left:3px solid var(--accent);padding:14px 16px;font-size:13px;color:var(--light-text);line-height:1.75;margin-bottom:16px;">General notes for the crew will appear here.</div>
-    <div class="cs-time-row"><span class="cs-time-label">Crew Call</span><span class="cs-time-value">TBC</span></div>
-    <div class="cs-time-row"><span class="cs-time-label">Shooting Call</span><span class="cs-time-value">TBC</span></div>
-    <div class="cs-time-row"><span class="cs-time-label">Breakfast</span><span class="cs-time-value">TBC</span></div>
-    <div class="cs-time-row"><span class="cs-time-label">Lunch</span><span class="cs-time-value">TBC</span></div>
-    <div class="cs-time-row"><span class="cs-time-label">Wrap</span><span class="cs-time-value">TBC</span></div>
+    <div style="background:var(--off);border-left:3px solid var(--accent);padding:14px 16px;font-size:13px;color:var(--light-text);line-height:1.75;margin-bottom:16px;">{{ site.data.callsheet.notes }}</div>
+    {% for time in site.data.callsheet.times %}
+    <div class="cs-time-row"><span class="cs-time-label">{{ time.label }}</span><span class="cs-time-value">{{ time.time }}</span></div>
+    {% endfor %}
   </div>
+  {% endif %}
 
   <!-- SCHEDULE (optional) -->
-  <div class="section hidden-section" id="schedule" style="padding-top:32px;">
-    <div class="section-divider" style="margin:0 0 32px;"></div>
+  {% if site.data.schedule.visible %}
+  <div class="section-divider"></div>
+  <div class="section" id="schedule">
     <div class="section-header">
       <div class="section-title">Schedule</div>
-      <div class="section-count">Day 1 of 1</div>
+      <div class="section-count">{{ site.data.schedule.scenes | size }} scenes</div>
     </div>
     <div style="overflow-x:auto;">
       <table class="data-table">
         <thead>
           <tr>
-            <th>Start</th>
-            <th>Scene</th>
-            <th>Description</th>
-            <th>D/N</th>
-            <th>Cast</th>
-            <th>Location</th>
-            <th>Pages</th>
-            <th>Est.</th>
+            <th>Start</th><th>Scene</th><th>Description</th><th>D/N</th><th>Cast</th><th>Location</th><th>Pages</th><th>Est.</th>
           </tr>
         </thead>
         <tbody>
+          {% for scene in site.data.schedule.scenes %}
           <tr>
-            <td>TBC</td>
-            <td><span class="scene-num">Scene 1</span></td>
-            <td><div class="scene-heading">INT. KITCHEN</div><div class="scene-desc">Scene description here.</div></td>
-            <td><span class="dn-day">DAY</span></td>
-            <td>1, 2</td>
-            <td>TBC</td>
-            <td>5/8</td>
-            <td>2h</td>
+            <td>{{ scene.start }}</td>
+            <td><span class="scene-num">Scene {{ scene.scene_num }}</span></td>
+            <td><div class="scene-heading">{{ scene.heading }}</div><div class="scene-desc">{{ scene.description }}</div></td>
+            <td>{% if scene.dn == "DAY" %}<span class="dn-day">DAY</span>{% else %}<span class="dn-night">NIGHT</span>{% endif %}</td>
+            <td>{{ scene.cast }}</td>
+            <td>{{ scene.location }}</td>
+            <td>{{ scene.pages }}</td>
+            <td>{{ scene.est }}</td>
           </tr>
-          <tr>
-            <td>TBC</td>
-            <td><span class="scene-num">Scene 2</span></td>
-            <td><div class="scene-heading">INT. LIVING ROOM</div><div class="scene-desc">Scene description here.</div></td>
-            <td><span class="dn-night">NIGHT</span></td>
-            <td>1, 2, 3</td>
-            <td>TBC</td>
-            <td>6/8</td>
-            <td>2h</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
+  {% endif %}
 
   <!-- TALENT (optional) -->
-  <div class="section hidden-section" id="talent" style="padding-top:32px;">
-    <div class="section-divider" style="margin:0 0 32px;"></div>
+  {% if site.data.talent.visible %}
+  <div class="section-divider"></div>
+  <div class="section" id="talent">
     <div class="section-header">
       <div class="section-title">Talent</div>
-      <div class="section-count">3 cast members</div>
+      <div class="section-count">{{ site.data.talent.talent | size }} cast members</div>
     </div>
     <div style="overflow-x:auto;">
       <table class="data-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Pickup</th>
-            <th>Call</th>
-            <th>H/MU</th>
-          </tr>
+          <tr><th></th><th>Name</th><th>Role</th><th>Pickup</th><th>Call</th></tr>
         </thead>
         <tbody>
+          {% for person in site.data.talent.talent %}
           <tr>
-            <td><div class="talent-avatar">IZ</div></td>
-            <td><div class="talent-cell"><div><div class="talent-name">Actor TBC</div><div class="talent-contact">email · phone</div></div></div></td>
-            <td>"Izz"</td>
-            <td>—</td>
-            <td>TBC</td>
-            <td>TBC</td>
-            <td>—</td>
+            <td><div class="talent-avatar">{{ person.name | slice: 0, 2 | upcase }}</div></td>
+            <td><div class="talent-name">{{ person.name }}</div><div class="talent-contact">{% if person.email != "" %}{{ person.email }}{% endif %}{% if person.phone != "" %} · {{ person.phone }}{% endif %}</div></td>
+            <td>"{{ person.role }}"</td>
+            <td>{{ person.pickup }}</td>
+            <td>{{ person.call }}</td>
           </tr>
-          <tr>
-            <td><div class="talent-avatar">AB</div></td>
-            <td><div class="talent-cell"><div><div class="talent-name">Actor TBC</div><div class="talent-contact">email · phone</div></div></div></td>
-            <td>"Aby"</td>
-            <td>—</td>
-            <td>TBC</td>
-            <td>TBC</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td><div class="talent-avatar">LA</div></td>
-            <td><div class="talent-cell"><div><div class="talent-name">Actor TBC</div><div class="talent-contact">email · phone</div></div></div></td>
-            <td>"Larry"</td>
-            <td>—</td>
-            <td>TBC</td>
-            <td>TBC</td>
-            <td>—</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
+  {% endif %}
 
   <!-- CREW (optional) -->
-  <div class="section hidden-section" id="crew" style="padding-top:32px;">
-    <div class="section-divider" style="margin:0 0 32px;"></div>
+  {% if site.data.crew.visible %}
+  <div class="section-divider"></div>
+  <div class="section" id="crew">
     <div class="section-header">
       <div class="section-title">Crew</div>
-      <div class="section-count">TBC total</div>
+      <div class="section-count">{{ site.data.crew.departments | size }} departments</div>
     </div>
-    <div class="crew-dept-label">Production</div>
+    {% for dept in site.data.crew.departments %}
+    <div class="crew-dept-label">{{ dept.dept }}</div>
     <div class="crew-grid">
+      {% for member in dept.members %}
       <div class="crew-member">
         <div class="crew-member-inner">
-          <div><div class="crew-name">Hantz Leger</div><div class="crew-role">Director</div><div class="crew-contact">info@breaddesign.co</div></div>
-          <div class="crew-call">TBC</div>
+          <div>
+            <div class="crew-name">{{ member.name }}</div>
+            <div class="crew-role">{{ member.role }}</div>
+            {% if member.email != "" %}<div class="crew-contact">{{ member.email }}</div>{% endif %}
+            {% if member.phone != "" %}<div class="crew-contact">{{ member.phone }}</div>{% endif %}
+          </div>
+          <div class="crew-call">{{ member.call }}</div>
         </div>
       </div>
-      <div class="crew-member">
-        <div class="crew-member-inner">
-          <div><div class="crew-name">TBC</div><div class="crew-role">Producer</div></div>
-          <div class="crew-call">TBC</div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-    <div class="crew-dept-label" style="margin-top:16px;">Camera</div>
-    <div class="crew-grid">
-      <div class="crew-member">
-        <div class="crew-member-inner">
-          <div><div class="crew-name">TBC</div><div class="crew-role">DOP</div></div>
-          <div class="crew-call">TBC</div>
-        </div>
-      </div>
-    </div>
-    <div class="crew-dept-label" style="margin-top:16px;">Sound</div>
-    <div class="crew-grid">
-      <div class="crew-member">
-        <div class="crew-member-inner">
-          <div><div class="crew-name">TBC</div><div class="crew-role">Sound Recordist</div></div>
-          <div class="crew-call">TBC</div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
+  {% endif %}
 
   <!-- LOCATIONS (optional) -->
-  <div class="section hidden-section" id="locations" style="padding-top:32px;">
-    <div class="section-divider" style="margin:0 0 32px;"></div>
+  {% if site.data.locations.visible %}
+  <div class="section-divider"></div>
+  <div class="section" id="locations">
     <div class="section-header">
       <div class="section-title">Locations</div>
-      <div class="section-count">TBC total</div>
+      <div class="section-count">{{ site.data.locations.locations | size }} locations</div>
     </div>
     <div class="location-header-row">
       <div class="location-header-cell"></div>
-      <div class="location-header-cell">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" style="margin-right:4px;">
-          <path d="M5 0C3.07 0 1.5 1.57 1.5 3.5c0 2.63 3.5 6.5 3.5 6.5s3.5-3.87 3.5-6.5C8.5 1.57 6.93 0 5 0zm0 4.75a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/>
-        </svg>
-        Set Location
-      </div>
+      <div class="location-header-cell">Set Location</div>
       <div class="location-header-cell">Parking</div>
-      <div class="location-header-cell">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2" style="margin-right:4px;">
-          <path d="M5 1a4 4 0 100 8A4 4 0 005 1zM5 3v2.5l1.5 1"/>
-        </svg>
-        Nearest Hospital
-      </div>
+      <div class="location-header-cell">Nearest Hospital</div>
     </div>
+    {% for loc in site.data.locations.locations %}
     <div class="location-row">
-      <div class="location-cell location-num-cell"><div class="location-num">1</div></div>
-      <div class="location-cell"><div class="location-value">TBC</div></div>
-      <div class="location-cell"><div class="location-value">TBC</div><div class="location-note">Parking instructions here.</div></div>
-      <div class="location-cell"><div class="location-value">TBC</div></div>
+      <div class="location-cell location-num-cell"><div class="location-num">{{ forloop.index }}</div></div>
+      <div class="location-cell"><div class="location-value">{{ loc.set_address }}</div></div>
+      <div class="location-cell"><div class="location-value">{{ loc.parking }}</div>{% if loc.parking_notes != "" %}<div class="location-note">{{ loc.parking_notes }}</div>{% endif %}</div>
+      <div class="location-cell"><div class="location-value">{{ loc.hospital }}</div>{% if loc.hospital_phone != "" %}<div class="location-note">{{ loc.hospital_phone }}</div>{% endif %}</div>
     </div>
+    {% endfor %}
   </div>
+  {% endif %}
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Bread<span>.</span></div>
-    <div class="footer-copy">Cooking Up A Storm · Confidential · Bread Media 2026</div>
+    <div class="footer-copy">{{ site.data.overview.title }} · Confidential · {{ site.data.overview.company }} 2026</div>
   </footer>
 
 </div><!-- /container -->
 
-  <script>
-    // Netlify Identity redirect
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/index.html";
-          });
-        }
-      });
-    }
-
-    // Character accordion
-    function toggleChar(header) {
-      const body = header.nextElementSibling;
-      const icon = header.querySelector('.character-toggle');
-      const isOpen = body.classList.contains('open');
-      document.querySelectorAll('.character-body').forEach(b => b.classList.remove('open'));
-      document.querySelectorAll('.character-header').forEach(h => h.classList.remove('open'));
-      document.querySelectorAll('.character-toggle').forEach(i => i.textContent = '+');
-      if (!isOpen) {
-        body.classList.add('open');
-        header.classList.add('open');
-        icon.textContent = '–';
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/index.html";
+        });
       }
-    }
-  </script>
+    });
+  }
+
+  function toggleChar(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('.character-toggle');
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.character-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.character-header').forEach(h => h.classList.remove('open'));
+    document.querySelectorAll('.character-toggle').forEach(i => i.textContent = '+');
+    if (!isOpen) { body.classList.add('open'); header.classList.add('open'); icon.textContent = '–'; }
+  }
+</script>
 
 </body>
 </html>
