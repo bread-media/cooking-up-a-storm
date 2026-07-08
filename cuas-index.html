@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cooking Up A Storm — Production Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0f0f1a; --white: #ffffff; --off: #f7f7fc;
+      --accent: #ff4d00; --muted: #7a7a90; --rule: #e4e4ee;
+      --text: #1a1a2a;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.7; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav { background: var(--black); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .nav-title { font-family: 'Red Hat Display', sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: white; }
+    .nav-title span { color: var(--accent); }
+    .nav-badge { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; }
+
+    /* HERO */
+    .hero { background: var(--black); padding: 48px 24px 40px; border-bottom: 3px solid var(--accent); }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .hero-title { font-family: 'Red Hat Display', sans-serif; font-size: clamp(32px,6vw,64px); font-weight: 900; text-transform: uppercase; line-height: 1.0; letter-spacing: -0.01em; color: white; margin-bottom: 16px; }
+    .hero-logline { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 640px; margin-bottom: 32px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; }
+    .hero-meta-item { }
+    .hero-meta-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+    .hero-meta-value { font-family: 'Red Hat Display', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; color: white; }
+
+    /* QUICK NAV */
+    .quick-nav { background: var(--off); border-bottom: 1px solid var(--rule); padding: 0 24px; overflow-x: auto; display: flex; gap: 0; white-space: nowrap; }
+    .quick-nav a { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 14px 16px; display: inline-block; border-bottom: 2px solid transparent; transition: all 0.2s; text-decoration: none; }
+    .quick-nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+    /* SECTION */
+    .section { padding: 40px 24px; border-bottom: 1px solid var(--rule); }
+    .section:last-child { border-bottom: none; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--black); }
+    .section-title { font-family: 'Red Hat Display', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--black); display: flex; align-items: center; gap: 10px; }
+    .section-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--accent); }
+    .section-count { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* SYNOPSIS */
+    .synopsis-text { font-size: 15px; line-height: 1.85; color: var(--text); max-width: 720px; }
+
+    /* SCRIPT */
+    .script-box { background: var(--off); border: 1px solid var(--rule); padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .script-info {}
+    .script-name { font-family: 'Red Hat Display', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; color: var(--black); margin-bottom: 4px; }
+    .script-meta { font-size: 12px; color: var(--muted); }
+    .script-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Red Hat Display', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: var(--black); color: white; padding: 12px 20px; transition: background 0.2s; text-decoration: none; white-space: nowrap; }
+    .script-btn:hover { background: var(--accent); text-decoration: none; }
+
+    /* CHARACTERS */
+    .character-card { background: var(--off); border: 1px solid var(--rule); margin-bottom: 16px; overflow: hidden; }
+    .character-header { padding: 20px 24px; background: var(--black); display: flex; justify-content: space-between; align-items: baseline; cursor: pointer; }
+    .character-header:hover { background: #1a1a2a; }
+    .character-name { font-family: 'Red Hat Display', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; color: white; }
+    .character-role { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .character-toggle { font-size: 20px; color: rgba(255,255,255,0.4); }
+    .character-body { padding: 24px; display: none; }
+    .character-body.open { display: block; }
+    .character-section-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; margin-top: 20px; }
+    .character-section-label:first-child { margin-top: 0; }
+    .character-text { font-size: 14px; line-height: 1.8; color: var(--text); }
+    .character-video { background: var(--black); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; margin-top: 8px; }
+    .character-video-placeholder { text-align: center; color: rgba(255,255,255,0.25); }
+    .character-video-placeholder svg { display: block; margin: 0 auto 8px; }
+    .character-video-placeholder p { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+    /* MOODBOARD */
+    .moodboard-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+    .moodboard-cell { aspect-ratio: 4/3; background: var(--off); border: 1px dashed var(--rule); overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+    .moodboard-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .moodboard-cell-placeholder { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #c0c0cc; text-align: center; }
+
+    /* CALL SHEET */
+    .callsheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .callsheet-item { background: var(--off); padding: 16px; }
+    .callsheet-item-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .callsheet-item-value { font-family: 'Red Hat Display', sans-serif; font-size: 20px; font-weight: 800; color: var(--black); }
+    .callsheet-note { font-size: 13px; color: var(--text); line-height: 1.75; background: var(--off); padding: 16px; border-left: 3px solid var(--accent); }
+    .callsheet-times { margin-top: 16px; }
+    .callsheet-time-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 13px; }
+    .callsheet-time-row:last-child { border-bottom: none; }
+    .callsheet-time-label { color: var(--muted); }
+    .callsheet-time-value { font-weight: 500; color: var(--black); }
+
+    /* SCHEDULE */
+    .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .schedule-table th { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--rule); background: var(--off); }
+    .schedule-table td { padding: 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .scene-num { background: var(--black); color: white; font-family: 'Red Hat Display', sans-serif; font-size: 11px; font-weight: 700; padding: 3px 7px; display: inline-block; }
+    .dn-badge { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 6px; }
+    .dn-day { background: #fff3e0; color: #e65100; }
+    .dn-night { background: #e8eaf6; color: #3949ab; }
+    .scene-desc { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    /* TALENT */
+    .talent-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .talent-table th { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--rule); background: var(--off); }
+    .talent-table td { padding: 12px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+    .talent-table tr:last-child td { border-bottom: none; }
+    .talent-avatar { width: 36px; height: 36px; background: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Red Hat Display', sans-serif; font-size: 13px; font-weight: 700; color: white; }
+    .talent-name { font-weight: 500; color: var(--black); }
+    .talent-contact { font-size: 11px; color: var(--muted); }
+
+    /* CREW */
+    .crew-dept { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--black); color: white; padding: 8px 12px; margin-top: 16px; margin-bottom: 0; }
+    .crew-dept:first-child { margin-top: 0; }
+    .crew-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .crew-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .crew-table tr:last-child td { border-bottom: none; }
+    .crew-name { font-weight: 500; color: var(--black); }
+    .crew-role { font-size: 11px; color: var(--muted); }
+    .crew-contact { font-size: 11px; color: var(--muted); }
+    .crew-call { font-family: 'Red Hat Display', sans-serif; font-size: 13px; font-weight: 700; color: var(--black); text-align: right; }
+
+    /* LOCATIONS */
+    .location-card { border: 1px solid var(--rule); margin-bottom: 12px; overflow: hidden; }
+    .location-num { background: var(--black); color: white; padding: 10px 16px; font-family: 'Red Hat Display', sans-serif; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .location-body { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .location-col { padding: 16px; border-right: 1px solid var(--rule); }
+    .location-col:last-child { border-right: none; }
+    .location-col-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .location-col-value { font-size: 13px; color: var(--text); line-height: 1.65; }
+    .location-col-note { font-size: 11px; color: var(--muted); margin-top: 6px; font-style: italic; }
+
+    /* HIDDEN SECTIONS */
+    .hidden-section { display: none; }
+
+    /* FOOTER */
+    footer { background: var(--black); padding: 24px; text-align: center; }
+    .footer-text { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      .moodboard-grid { grid-template-columns: 1fr 1fr; }
+      .callsheet-grid { grid-template-columns: 1fr; }
+      .location-body { grid-template-columns: 1fr; }
+      .location-col { border-right: none; border-bottom: 1px solid var(--rule); }
+      .location-col:last-child { border-bottom: none; }
+      .schedule-table { font-size: 12px; }
+      .schedule-table th, .schedule-table td { padding: 8px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-title">Cooking Up A <span>Storm</span></div>
+    <div class="nav-badge">Production Hub</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Short Film · Bread Media</div>
+    <h1 class="hero-title">Cooking Up<br/>A Storm</h1>
+    <p class="hero-logline">While caring for their dying patriarch, three siblings uncover a decades-old family secret. As bickering turns to chaos, their own clumsy negligence threatens to turn a quiet vigil into a fatal comedy of errors.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Director</div>
+        <div class="hero-meta-value">Hantz Leger</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Shoot Date</div>
+        <div class="hero-meta-value">TBC</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Format</div>
+        <div class="hero-meta-value">Short Film</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Genre</div>
+        <div class="hero-meta-value">Dark Comedy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK NAV -->
+  <div class="quick-nav">
+    <a href="#synopsis">Synopsis</a>
+    <a href="#script">Script</a>
+    <a href="#characters">Characters</a>
+    <a href="#moodboard">Moodboard</a>
+    <a href="#callsheet">Call Sheet</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#talent">Talent</a>
+    <a href="#crew">Crew</a>
+    <a href="#locations">Locations</a>
+  </div>
+
+  <!-- SYNOPSIS -->
+  <div class="section" id="synopsis">
+    <div class="section-header">
+      <div class="section-title">Synopsis</div>
+    </div>
+    <p class="synopsis-text">While caring for their dying patriarch, three siblings uncover a decades-old family secret. As bickering turns to chaos, their own clumsy negligence threatens to turn a quiet vigil into a fatal comedy of errors. A darkly comic meditation on family, guilt, and the chaos that erupts when love and dysfunction collide in the same kitchen.</p>
+  </div>
+
+  <!-- SCRIPT -->
+  <div class="section" id="script">
+    <div class="section-header">
+      <div class="section-title">Script</div>
+    </div>
+    <div class="script-box">
+      <div class="script-info">
+        <div class="script-name">Cooking Up A Storm — Final Draft</div>
+        <div class="script-meta">PDF · Google Drive · Updated TBC</div>
+      </div>
+      <a href="https://drive.google.com/file/d/1TZwjwv5IZYqU6yS9StcTLkzGHhuPr1x9/view?usp=sharing" target="_blank" class="script-btn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v8M4 6l3 3 3-3M2 10v2a1 1 0 001 1h8a1 1 0 001-1v-2"/></svg>
+        Download Script
+      </a>
+    </div>
+  </div>
+
+  <!-- CHARACTERS -->
+  <div class="section" id="characters">
+    <div class="section-header">
+      <div class="section-title">Characters</div>
+      <div class="section-count">3 characters</div>
+    </div>
+
+    <!-- IZZ -->
+    <div class="character-card">
+      <div class="character-header" onclick="toggleChar(this)">
+        <div>
+          <div class="character-name">Izz</div>
+          <div class="character-role">20s · Middle child</div>
+        </div>
+        <div class="character-toggle">+</div>
+      </div>
+      <div class="character-body">
+        <div class="character-section-label">Background</div>
+        <p class="character-text">The problematic and rebellious middle child. Saw which way her life was heading — not in a good direction — and viewed a police career as her salvation and a way to erase Grandad's disappointment with most of her life choices. Like Larry, what Gramps thinks of her is an important component of her self esteem.</p>
+        <div class="character-section-label">Director's Notes</div>
+        <p class="character-text">TBC — director's notes will be added here.</p>
+        <div class="character-section-label">Reference</div>
+        <div class="character-video">
+          <div class="character-video-placeholder">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="20" cy="20" r="18"/><path d="M16 13l12 7-12 7V13z"/></svg>
+            <p>Video placeholder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABY -->
+    <div class="character-card">
+      <div class="character-header" onclick="toggleChar(this)">
+        <div>
+          <div class="character-name">Aby</div>
+          <div class="character-role">20s · Youngest sibling</div>
+        </div>
+        <div class="character-toggle">+</div>
+      </div>
+      <div class="character-body">
+        <div class="character-section-label">Background</div>
+        <p class="character-text">The youngest sibling but never got a free pass because of it. She lost her job as an estate agent because she was using the kitchens of the homes she was supposed to be selling to kick-start her home-chef influencer ambitions. She lost her rented flat soon after that. She now lives with Gramps and in between being his main carer she works from home as a customer service rep.</p>
+        <div class="character-section-label">Director's Notes</div>
+        <p class="character-text">TBC — director's notes will be added here.</p>
+        <div class="character-section-label">Reference</div>
+        <div class="character-video">
+          <div class="character-video-placeholder">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="20" cy="20" r="18"/><path d="M16 13l12 7-12 7V13z"/></svg>
+            <p>Video placeholder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LARRY -->
+    <div class="character-card">
+      <div class="character-header" onclick="toggleChar(this)">
+        <div>
+          <div class="character-name">Larry</div>
+          <div class="character-role">Early 30s · Eldest sibling</div>
+        </div>
+        <div class="character-toggle">+</div>
+      </div>
+      <div class="character-body">
+        <div class="character-section-label">Background</div>
+        <p class="character-text">Criminal solicitor/lawyer. When he started his law career he was newly married, idealistic and optimistic. He admired and looked up to Grandad and the way he was turning kids' lives around as a teacher, and wanted to do something equally important and transformational in the "justice" system. That was before crippling government cuts to legal aid and the court system made that goal a pipe dream.</p>
+        <div class="character-section-label">Director's Notes</div>
+        <p class="character-text">TBC — director's notes will be added here.</p>
+        <div class="character-section-label">Reference</div>
+        <div class="character-video">
+          <div class="character-video-placeholder">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="20" cy="20" r="18"/><path d="M16 13l12 7-12 7V13z"/></svg>
+            <p>Video placeholder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MOODBOARD -->
+  <div class="section" id="moodboard">
+    <div class="section-header">
+      <div class="section-title">Moodboard</div>
+      <div class="section-count">6 images max</div>
+    </div>
+    <div class="moodboard-grid">
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 1</div></div>
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 2</div></div>
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 3</div></div>
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 4</div></div>
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 5</div></div>
+      <div class="moodboard-cell"><div class="moodboard-cell-placeholder">Image 6</div></div>
+    </div>
+  </div>
+
+  <!-- CALL SHEET (optional) -->
+  <div class="section hidden-section" id="callsheet">
+    <div class="section-header">
+      <div class="section-title">Call Sheet</div>
+      <div class="section-count">Day 1 of 1</div>
+    </div>
+    <div class="callsheet-grid">
+      <div class="callsheet-item">
+        <div class="callsheet-item-label">General Call Time</div>
+        <div class="callsheet-item-value">TBC</div>
+      </div>
+      <div class="callsheet-item">
+        <div class="callsheet-item-label">Shooting Call</div>
+        <div class="callsheet-item-value">TBC</div>
+      </div>
+    </div>
+    <div class="callsheet-note">General notes will appear here. Add any basecamp info, parking notes, or crew instructions.</div>
+    <div class="callsheet-times">
+      <div class="callsheet-time-row"><span class="callsheet-time-label">Crew Call</span><span class="callsheet-time-value">TBC</span></div>
+      <div class="callsheet-time-row"><span class="callsheet-time-label">Shooting Call</span><span class="callsheet-time-value">TBC</span></div>
+      <div class="callsheet-time-row"><span class="callsheet-time-label">Breakfast</span><span class="callsheet-time-value">TBC</span></div>
+      <div class="callsheet-time-row"><span class="callsheet-time-label">Lunch</span><span class="callsheet-time-value">TBC</span></div>
+      <div class="callsheet-time-row"><span class="callsheet-time-label">Wrap</span><span class="callsheet-time-value">TBC</span></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE (optional) -->
+  <div class="section hidden-section" id="schedule">
+    <div class="section-header">
+      <div class="section-title">Schedule</div>
+      <div class="section-count">Day 1 of 1</div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Start</th>
+            <th>Scene</th>
+            <th>Description</th>
+            <th>D/N</th>
+            <th>Cast</th>
+            <th>Location</th>
+            <th>Est.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TBC</td>
+            <td><span class="scene-num">1</span></td>
+            <td><strong>INT. KITCHEN</strong><p class="scene-desc">Scene description here.</p></td>
+            <td><span class="dn-badge dn-day">DAY</span></td>
+            <td>1, 2</td>
+            <td>TBC</td>
+            <td>2h</td>
+          </tr>
+          <tr>
+            <td>TBC</td>
+            <td><span class="scene-num">2</span></td>
+            <td><strong>INT. LIVING ROOM</strong><p class="scene-desc">Scene description here.</p></td>
+            <td><span class="dn-badge dn-night">NIGHT</span></td>
+            <td>1, 2, 3</td>
+            <td>TBC</td>
+            <td>2h</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TALENT (optional) -->
+  <div class="section hidden-section" id="talent">
+    <div class="section-header">
+      <div class="section-title">Talent</div>
+      <div class="section-count">3 cast members</div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="talent-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Pickup</th>
+            <th>Call</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="talent-avatar">IZ</div></td>
+            <td><div class="talent-name">Actor TBC</div><div class="talent-contact">email@email.com · 07xxx xxxxxx</div></td>
+            <td>"Izz"</td>
+            <td>TBC</td>
+            <td>TBC</td>
+          </tr>
+          <tr>
+            <td><div class="talent-avatar">AB</div></td>
+            <td><div class="talent-name">Actor TBC</div><div class="talent-contact">email@email.com · 07xxx xxxxxx</div></td>
+            <td>"Aby"</td>
+            <td>TBC</td>
+            <td>TBC</td>
+          </tr>
+          <tr>
+            <td><div class="talent-avatar">LA</div></td>
+            <td><div class="talent-name">Actor TBC</div><div class="talent-contact">email@email.com · 07xxx xxxxxx</div></td>
+            <td>"Larry"</td>
+            <td>TBC</td>
+            <td>TBC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CREW (optional) -->
+  <div class="section hidden-section" id="crew">
+    <div class="section-header">
+      <div class="section-title">Crew</div>
+      <div class="section-count">TBC total</div>
+    </div>
+    <div class="crew-dept">Production</div>
+    <table class="crew-table">
+      <tr>
+        <td><div class="crew-name">Hantz Leger</div><div class="crew-role">Director</div><div class="crew-contact">info@breaddesign.co</div></td>
+        <td class="crew-call">TBC</td>
+      </tr>
+      <tr>
+        <td><div class="crew-name">TBC</div><div class="crew-role">Producer</div><div class="crew-contact">—</div></td>
+        <td class="crew-call">TBC</td>
+      </tr>
+    </table>
+    <div class="crew-dept">Camera</div>
+    <table class="crew-table">
+      <tr>
+        <td><div class="crew-name">TBC</div><div class="crew-role">DOP</div><div class="crew-contact">—</div></td>
+        <td class="crew-call">TBC</td>
+      </tr>
+    </table>
+    <div class="crew-dept">Sound</div>
+    <table class="crew-table">
+      <tr>
+        <td><div class="crew-name">TBC</div><div class="crew-role">Sound Recordist</div><div class="crew-contact">—</div></td>
+        <td class="crew-call">TBC</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- LOCATIONS (optional) -->
+  <div class="section hidden-section" id="locations">
+    <div class="section-header">
+      <div class="section-title">Locations</div>
+      <div class="section-count">TBC total</div>
+    </div>
+    <div class="location-card">
+      <div class="location-num">Location 1</div>
+      <div class="location-body">
+        <div class="location-col">
+          <div class="location-col-label">Set Location</div>
+          <div class="location-col-value">TBC</div>
+        </div>
+        <div class="location-col">
+          <div class="location-col-label">Parking</div>
+          <div class="location-col-value">TBC</div>
+          <div class="location-col-note">Parking instructions here.</div>
+        </div>
+        <div class="location-col">
+          <div class="location-col-label">Nearest Hospital</div>
+          <div class="location-col-value">TBC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-text">Cooking Up A Storm · Bread Media · Confidential</div>
+  </footer>
+
+  <script>
+    // Character accordion
+    function toggleChar(header) {
+      const body = header.nextElementSibling;
+      const icon = header.querySelector('.character-toggle');
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.character-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.character-toggle').forEach(i => i.textContent = '+');
+      if (!isOpen) { body.classList.add('open'); icon.textContent = '–'; }
+    }
+  </script>
+
+</body>
+</html>
