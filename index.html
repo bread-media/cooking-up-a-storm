@@ -496,7 +496,19 @@
     <div class="footer-text">Cooking Up A Storm · Bread Media · Confidential</div>
   </footer>
 
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
+    // Handle Netlify Identity redirect after email confirmation
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/index.html";
+          });
+        }
+      });
+    }
+
     // Character accordion
     function toggleChar(header) {
       const body = header.nextElementSibling;
