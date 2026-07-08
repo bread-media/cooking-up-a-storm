@@ -1,0 +1,16 @@
+{
+  "visible": false,
+  "scenes": [
+    {
+      "start": "TBC",
+      "scene_num": "1",
+      "heading": "INT. KITCHEN",
+      "description": "Scene description here.",
+      "dn": "DAY",
+      "cast": "1, 2",
+      "location": "TBC",
+      "pages": "5/8",
+      "est": "2h"
+    }
+  ]
+}

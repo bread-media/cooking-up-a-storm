@@ -1,0 +1,13 @@
+{
+  "visible": false,
+  "locations": [
+    {
+      "name": "Location 1",
+      "set_address": "TBC",
+      "parking": "TBC",
+      "parking_notes": "",
+      "hospital": "TBC",
+      "hospital_phone": ""
+    }
+  ]
+}

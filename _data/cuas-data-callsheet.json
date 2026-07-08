@@ -1,0 +1,15 @@
+{
+  "visible": false,
+  "day": "Day 1 of 1",
+  "general_call": "TBC",
+  "shooting_call": "TBC",
+  "notes": "General notes for the crew will appear here. Add basecamp info, parking instructions, or any notes for the whole crew.",
+  "general_note_line": "All crew report to set",
+  "times": [
+    { "label": "Crew Call", "time": "TBC" },
+    { "label": "Shooting Call", "time": "TBC" },
+    { "label": "Breakfast", "time": "TBC" },
+    { "label": "Lunch", "time": "TBC" },
+    { "label": "Wrap", "time": "TBC" }
+  ]
+}

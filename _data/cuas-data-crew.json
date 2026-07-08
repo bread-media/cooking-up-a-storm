@@ -1,0 +1,24 @@
+{
+  "visible": false,
+  "departments": [
+    {
+      "dept": "Production",
+      "members": [
+        { "name": "Hantz Leger", "role": "Director", "email": "info@breaddesign.co", "phone": "", "call": "TBC" },
+        { "name": "TBC", "role": "Producer", "email": "", "phone": "", "call": "TBC" }
+      ]
+    },
+    {
+      "dept": "Camera",
+      "members": [
+        { "name": "TBC", "role": "DOP", "email": "", "phone": "", "call": "TBC" }
+      ]
+    },
+    {
+      "dept": "Sound",
+      "members": [
+        { "name": "TBC", "role": "Sound Recordist", "email": "", "phone": "", "call": "TBC" }
+      ]
+    }
+  ]
+}
