@@ -1,0 +1,17 @@
+title: Cooking Up A Storm
+description: Production Hub
+baseurl: ""
+url: "https://cooking-up-a-storm.netlify.app"
+
+# Jekyll settings
+markdown: kramdown
+permalink: pretty
+
+# Include data files
+data_dir: _data
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
